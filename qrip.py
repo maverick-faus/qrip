@@ -9,7 +9,8 @@ def form(str): #Formato de String de Regex
         else:
          return "("+str+")"
      
-     
+#Definición del automata--------------------------------------------
+''' Ejemplo de la figura 1.67 del Sipser     
 s={1,2}
 alfabeto={'a','b'}
 inicial=1
@@ -20,14 +21,14 @@ transiciones={
     (2,'a',2),
     (2,'b',2)
 }
-
+'''
  
-     
-''' Ejemplo de la figura 1.69 del Sipser
-s={1,2,3}
-alfabeto={'a','b'}
-inicial=1
-aceptacion={2,3}
+# Ejemplo de la figura 1.69 del Sipser
+
+s={1,2,3} #Conjunto de estados
+alfabeto={'a','b'} #Conjunto de símbolos
+inicial=1 #Estado inicial
+aceptacion={2,3} #EStados de aceptación
 transiciones={
     (1,'a',2),
     (1,'b',3),
@@ -36,11 +37,12 @@ transiciones={
     (3,'a',2),
     (3,'b',1)
 }
-'''
+#------------------------------------------------------------------------
 
 noEStados=len(s)
 m = np.full((noEStados+2,noEStados+2), "",dtype=np.dtype('U1000')) 
 
+#Llenado de la matriz de transiciones
 for t  in transiciones:
     if  m[t[0]][t[2]]!= "":
         aux=m[t[0]][t[2]]
@@ -59,7 +61,7 @@ nuevoAceptacion=noEStados+1
 for estado in aceptacion:
     m[estado][nuevoAceptacion]='e'
 
-#Creamos un conjunto con los nuevos estados
+#Creamos un conjunto con los nuevos estados 
 news=set()
 for elem in s:
     news.add(elem)
@@ -87,6 +89,6 @@ for qk in s: #Para cada estado original
                 
                 newregex=form(r1)+r2+form(r3)+r4
                 m[qi][qj]=newregex 
-    m[qrip] = np.full(noEStados+2 , "",dtype=np.dtype('U1000')) 
+    m[qrip] = np.full(noEStados+2 , "",dtype=np.dtype('U1000'))
     m[:, qrip] =  ""            
 print (m[inicial][nuevoAceptacion])
