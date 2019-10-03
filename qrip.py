@@ -8,7 +8,8 @@ def form(str): #Formato de String de Regex
             return str
         else:
          return "("+str+")"
-
+     
+     
 s={1,2}
 alfabeto={'a','b'}
 inicial=1
@@ -19,6 +20,23 @@ transiciones={
     (2,'a',2),
     (2,'b',2)
 }
+
+ 
+     
+''' Ejemplo de la figura 1.69 del Sipser
+s={1,2,3}
+alfabeto={'a','b'}
+inicial=1
+aceptacion={2,3}
+transiciones={
+    (1,'a',2),
+    (1,'b',3),
+    (2,'a',1),
+    (2,'b',2),
+    (3,'a',2),
+    (3,'b',1)
+}
+'''
 
 noEStados=len(s)
 m = np.full((noEStados+2,noEStados+2), "",dtype=np.dtype('U1000')) 
@@ -69,6 +87,6 @@ for qk in s: #Para cada estado original
                 
                 newregex=form(r1)+r2+form(r3)+r4
                 m[qi][qj]=newregex 
-                m[qrip] = np.full(noEStados+2 , "",dtype=np.dtype('U1000')) 
-                
-print("->"+newregex)
+    m[qrip] = np.full(noEStados+2 , "",dtype=np.dtype('U1000')) 
+    m[:, qrip] =  ""            
+print (m[inicial][nuevoAceptacion])
